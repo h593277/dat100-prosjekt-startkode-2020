@@ -36,7 +36,7 @@ public class ShowRoute extends EasyGraphics {
 
 		showRouteMap(MARGIN + MAPYSIZE);
 		
-		showStatistics();
+		//showStatistics(); Må kommentere ut dette siden funksjonen ikke er implementert
 	}
 
 	// antall x-pixels per lengdegrad
@@ -53,26 +53,32 @@ public class ShowRoute extends EasyGraphics {
 	// antall y-pixels per breddegrad
 	public double ystep() {
 	
-		double ystep;
-		
-		// TODO - START
-		
-		throw new UnsupportedOperationException(TODO.method());
+		double maxlat = GPSUtils.findMax(GPSUtils.getLatitudes(gpspoints));
+		double minlat = GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints));
 
-		// TODO - SLUTT
+		double ystep = MAPYSIZE / (Math.abs(maxlat - minlat)); 
+
+		return ystep;
 		
 	}
 
 	public void showRouteMap(int ybase) {
-
-		// TODO - START
+		int x, y;
 		
-		throw new UnsupportedOperationException(TODO.method());
+		setColor(0, 255, 0);
+		for(int i = 0; i < gpspoints.length; i++) {
+			x = (int)gpspoints[i].getLongitude() + MARGIN; //Få samme verdi fra getLongitude og getLatitude så det må fikses.
+			y = ybase - (int)gpspoints[i].getLatitude();
+			
+			
+			System.out.format("%d , %d\n", x, y);
+			drawCircle(x, y, 5);
+		}
 		
-		// TODO - SLUTT
 	}
 
-	public void showStatistics() {
+	/* Dette er kommentert ut siden programmet kjører ikke med det siden det ikke er implementert enda
+	public void showStatistics() { 
 
 		int TEXTDISTANCE = 20;
 
@@ -84,6 +90,6 @@ public class ShowRoute extends EasyGraphics {
 		throw new UnsupportedOperationException(TODO.method());
 		
 		// TODO - SLUTT;
-	}
+	}*/
 
 }

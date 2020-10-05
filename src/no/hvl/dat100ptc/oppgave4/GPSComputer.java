@@ -110,7 +110,7 @@ public class GPSComputer {
 		if(speedmph >= 16) met = 12.0;
 		if(speedmph > 20) met = 16.0;
 
-		kcal = met / (weight * secs);
+		kcal = met * weight * secs / 3600.0;
 		
 		return kcal;
 	}
@@ -134,12 +134,14 @@ public class GPSComputer {
 
 		System.out.println("==============================================");
 
-		// TODO - START
-
-		throw new UnsupportedOperationException(TODO.method());
+		System.out.format("%-15s:%12s\n", "Total Time", GPSUtils.formatTime(totalTime()));
+		System.out.format("%-15s:%12.2f km\n", "Total distance", totalDistance()/1000);
+		System.out.format("%-15s:%12.2f m\n", "Total elevation", totalElevation());
+		System.out.format("%-15s:%12.2f km/t\n", "Max speed", maxSpeed());
+		System.out.format("%-15s:%12.2f km/t\n", "Average speed", averageSpeed());
+		System.out.format("%-15s:%12.2f kcal\n", "Energy", totalKcal(2)); //Trenger å putte inn en ordentlig verdi her!!!!
 		
-		// TODO - SLUTT
-		
+		System.out.println("==============================================");
 	}
 
 }

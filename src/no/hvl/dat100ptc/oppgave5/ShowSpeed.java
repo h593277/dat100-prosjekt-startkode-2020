@@ -47,11 +47,14 @@ public class ShowSpeed extends EasyGraphics {
 		double[] speeds = gpscomputer.speeds();
 
 		int x = MARGIN,y;
-
-		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
-	
-		// TODO - SLUTT
+		setColor(0, 0, 255);
+		for(int i = 0; i < N; i++) {
+			y = (int)speeds[i];
+			drawLine(x + 2*i, ybase, x + 2*i, ybase - y);
+		}
+		setColor(0, 255, 0);
+		y = (int)gpscomputer.averageSpeed();
+		drawLine(x, ybase - y, x + 2 * N, ybase - y);
 	}
 }
