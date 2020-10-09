@@ -36,7 +36,7 @@ public class ShowRoute extends EasyGraphics {
 
 		showRouteMap(MARGIN + MAPYSIZE);
 		
-		//showStatistics(); Må kommentere ut dette siden funksjonen ikke er implementert
+		showStatistics();
 	}
 
 	// antall x-pixels per lengdegrad
@@ -53,43 +53,46 @@ public class ShowRoute extends EasyGraphics {
 	// antall y-pixels per breddegrad
 	public double ystep() {
 	
-		double maxlat = GPSUtils.findMax(GPSUtils.getLatitudes(gpspoints));
-		double minlat = GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints));
-
-		double ystep = MAPYSIZE / (Math.abs(maxlat - minlat)); 
-
+		double ystep;
+		
+		double maxLat = GPSUtils.findMax(GPSUtils.getLatitudes(gpspoints));
+		double minLat = GPSUtils.findMin(GPSUtils.getLatitudes(gpspoints));
+		
+		ystep = MAPYSIZE / (Math.abs(maxLat - minLat));
+		
 		return ystep;
 		
 	}
 
 	public void showRouteMap(int ybase) {
-		int x, y;
-		
-		setColor(0, 255, 0);
-		for(int i = 0; i < gpspoints.length; i++) {
-			x = (int)gpspoints[i].getLongitude() + MARGIN; //Få samme verdi fra getLongitude og getLatitude så det må fikses.
-			y = ybase - (int)gpspoints[i].getLatitude();
-			
-			
-			System.out.format("%d , %d\n", x, y);
-			drawCircle(x, y, 5);
+
+		setColor(0,128,0);
+		int x,y;
+		for(int i = 0; i < gpspoints.length; i++)
+		{	
+			x = (int)gpspoints[i].getLongitude()*(int)xstep();
+			y = ybase - (int)gpspoints[i].getLatitude()*(int)ystep();
+			fillCircle(x,y,5);
 		}
-		
 	}
 
-	/* Dette er kommentert ut siden programmet kjører ikke med det siden det ikke er implementert enda
-	public void showStatistics() { 
+	public void showStatistics() {
 
 		int TEXTDISTANCE = 20;
 
 		setColor(0,0,0);
 		setFont("Courier",12);
+		int ybase = 20;
 		
-		// TODO - START
+		drawString("Time: " + (gpscomputer.totalTime()/3600) + ":" + (gpscomputer.totalTime()/60%60) + ":" + (gpscomputer.totalTime()%60), TEXTDISTANCE, ybase);
+		drawString(String.format("Average Speed: %.2f", (gpscomputer.averageSpeed())) + " km/t", TEXTDISTANCE, ybase+20);
+		drawString(String.format("Total Distance: %.2f", (gpscomputer.totalDistance())) + " km", TEXTDISTANCE, ybase+40);
+		drawString(String.format("Total Elevation: %.2f", (gpscomputer.totalElevation())) + " elevation", TEXTDISTANCE, ybase+60);
+		drawString(String.format("Total Kcal: %.2f", (gpscomputer.totalKcal(80))) + " kcal", TEXTDISTANCE, ybase+80);
 		
-		throw new UnsupportedOperationException(TODO.method());
 		
-		// TODO - SLUTT;
-	}*/
+		
+	
+	}
 
 }
