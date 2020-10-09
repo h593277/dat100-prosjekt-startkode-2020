@@ -16,9 +16,9 @@ public class GPSDataConverter {
 		
 		int secs;
 		int hr, min, sec;
-		String sekunder = timestr.substring(17, 18);
-		String minutter = timestr.substring(14, 15);
-		String timer = timestr.substring(12, 12);
+		String sekunder = timestr.substring(17, 19);
+		String minutter = timestr.substring(14, 16);
+		String timer = timestr.substring(11, 13);
 		hr = Integer.parseInt(timer);
 		min = Integer.parseInt(minutter);
 		sec = Integer.parseInt(sekunder);
@@ -30,13 +30,14 @@ public class GPSDataConverter {
 	}
 
 	public static GPSPoint convert(String timeStr, String latitudeStr, String longitudeStr, String elevationStr) {
-
+		
 		GPSPoint gpspoint = new GPSPoint();
-
-		gpspoint.setTime(Integer.parseInt(timeStr));
+	
+		gpspoint.setTime(toSeconds(timeStr));
 		gpspoint.setLatitude(Double.parseDouble(latitudeStr));
 		gpspoint.setLongitude(Double.parseDouble(longitudeStr));
 		gpspoint.setElevation(Double.parseDouble(elevationStr));
+		
 		return gpspoint;
 	    
 	}

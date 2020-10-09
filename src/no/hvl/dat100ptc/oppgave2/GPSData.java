@@ -9,10 +9,8 @@ public class GPSData {
 
 	public GPSData(int n) {
 
-		for(antall = 0; antall < n; antall++)
-		{
-			gpspoints[antall] = new GPSPoint();
-		}
+		gpspoints = new GPSPoint[n];
+		antall = 0;
 	}
 
 	public GPSPoint[] getGPSPoints() {
@@ -22,13 +20,11 @@ public class GPSData {
 	protected boolean insertGPS(GPSPoint gpspoint) {
 
 		boolean inserted = false;
-		for(antall = 0; antall < gpspoints.length; antall++)
+		if(antall < gpspoints.length) 
 		{
 			gpspoints[antall] = gpspoint;
-			if(gpspoints[antall] == gpspoint)
-			{
-				inserted = true;
-			}
+			antall++;
+			inserted = true;
 		}
 		
 		return inserted;
@@ -37,12 +33,10 @@ public class GPSData {
 
 	public boolean insert(String time, String latitude, String longitude, String elevation) {
 		
-		//GPSPoint gpspoint;
-		insertGPS(GPSDataConverter.convert(time, latitude, longitude, elevation));
+		GPSPoint gpspoint;
+		gpspoint = GPSDataConverter.convert(time, latitude, longitude, elevation);
 		
-		boolean inserted = true;
-		
-		return inserted;
+		return insertGPS(gpspoint);
 		
 	}
 
