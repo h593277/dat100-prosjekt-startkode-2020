@@ -88,7 +88,7 @@ public class ShowRoute extends EasyGraphics {
 		
 		drawString("Time: " + (gpscomputer.totalTime()/3600) + ":" + (gpscomputer.totalTime()/60%60) + ":" + (gpscomputer.totalTime()%60), TEXTDISTANCE, ybase);
 		drawString(String.format("Average Speed: %.2f", (gpscomputer.averageSpeed())) + " km/t", TEXTDISTANCE, ybase+20);
-		drawString(String.format("Total Distance: %.2f", (gpscomputer.totalDistance())) + " km", TEXTDISTANCE, ybase+40);
+		drawString(String.format("Total Distance: %.2f", (gpscomputer.totalDistance()/1000)) + " km", TEXTDISTANCE, ybase+40);
 		drawString(String.format("Total Elevation: %.2f", (gpscomputer.totalElevation())) + " elevation", TEXTDISTANCE, ybase+60);
 		drawString(String.format("Total Kcal: %.2f", (gpscomputer.totalKcal(80))) + " kcal", TEXTDISTANCE, ybase+80);
 		
